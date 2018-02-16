@@ -126,11 +126,8 @@ ALTER TABLE tp.utiliser ADD CONSTRAINT FK_utiliser_idInter FOREIGN KEY (idInter)
 INSERT INTO tp.TYPE_UTILISATEUR (idTypeUtil,intitule)
 VALUES (1,'manager'),(2,'visiteur');
 
-INSERT INTO tp.UTILISATEUR (idUser,nomUser,prenomUser,matricule,mdpUser,mailUser)
-VALUES (1,'marivint','yvann','YM','YM090117!','marivint.yvann@gmail.com');
-
-INSERT INTO tp.DETERMINER (idUser,idTypeUtil)
-VALUES (1,1);
+INSERT INTO tp.UTILISATEUR (idUser,nomUser,prenomUser,matricule,mdpUser,mailUser,idTypeUtil)
+VALUES (1,'marivint','yvann','YM','YM090117!','marivint.yvann@gmail.com',1);
 
 INSERT INTO tp.VILLE (nomVille)
 VALUES ('Paris');
@@ -144,11 +141,11 @@ VALUES ('2018-02-16 12:58:00',1);
 INSERT INTO tp.RESSOURCE (intitule,etat,qteDispo)
 VALUES ('ordinateur asus','disponible','10');
 
-INSERT INTO tp.INTERVENTION (idInter,typeInter,etatInter,dateDebut,dateFin,idSecteur,idUser,idUser_UTILISATEUR)
-VALUES (1,'interne','en cours','2018-02-16 13:30:00','2018-02-16 17:00:00',1,1,1);
+INSERT INTO tp.INTERVENTION (idInter,typeInter,etatInter,dateDebut,dateFin,intitule,idSecteur,idUser,idUser_UTILISATEUR)
+VALUES (1,'interne','en cours','2018-02-16 13:30:00','2018-02-16 17:00:00','achat pc',1,1,1);
 
 INSERT INTO tp.UTILISER (idRessource,idInter)
 VALUES (1,1);
 
-INSERT INTO tp.DEPEND (qteRessource,idCommande,idRessource)
+INSERT INTO tp.CONCERNER (qteRessource,idCommande,idRessource)
 VALUES ('5',1,1);
