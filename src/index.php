@@ -1,6 +1,6 @@
 <?php
 // Connexion, sélection de la base de données
-$dbconn = pg_connect("host=localhost dbname=TpGAME user=postgres password=P@ssw0rd")
+$dbconn = pg_connect("host=localhost dbname=tpgame user=yvann password=yvann")
     or die('Connexion impossible : ' . pg_last_error());
 
 // Exécution de la requête SQL
@@ -41,7 +41,7 @@ $result = pg_query($query) or die('Échec de la requête : ' . pg_last_error());
         <h1 class="cover-heading">Résultat SQL</h1>
 		<?php
 
-		echo "<table>\n";
+		echo "<table class='table table-inverse'>\n";
 		while ($line = pg_fetch_array($result, null, PGSQL_ASSOC)) {
 		    echo "\t<tr>\n";
 		    foreach ($line as $col_value) {
@@ -71,26 +71,3 @@ $result = pg_query($query) or die('Échec de la requête : ' . pg_last_error());
     <script src="js/bootstrap.min.js"></script>
   </body>
 </html>
-
-
-
-
-
-<?php
-// Affichage des résultats en HTML
-// echo "<table>\n";
-// while ($line = pg_fetch_array($result, null, PGSQL_ASSOC)) {
-//     echo "\t<tr>\n";
-//     foreach ($line as $col_value) {
-//         echo "\t\t<td>$col_value</td>\n";
-//     }
-//     echo "\t</tr>\n";
-// }
-// echo "</table>\n";
-
-// Libère le résultat
-pg_free_result($result);
-
-// Ferme la connexion
-pg_close($dbconn);
-?>
