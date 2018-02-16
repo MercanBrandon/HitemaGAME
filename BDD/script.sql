@@ -7,12 +7,13 @@
 ------------------------------------------------------------
 -- Table: INTERVENTION
 ------------------------------------------------------------
-CREATE TABLE tp.INTERVENTION(
+CREATE TABLE public.INTERVENTION(
 	idInter            SERIAL NOT NULL ,
 	typeInter          CHAR (25)  NOT NULL ,
 	etatInter          CHAR (25)   ,
 	dateDebut          DATE   ,
 	dateFin            DATE   ,
+	intitule           CHAR (50)   ,
 	idSecteur          INT   ,
 	idUser             INT  NOT NULL ,
 	idUser_UTILISATEUR INT  NOT NULL ,
@@ -23,13 +24,14 @@ CREATE TABLE tp.INTERVENTION(
 ------------------------------------------------------------
 -- Table: UTILISATEUR
 ------------------------------------------------------------
-CREATE TABLE tp.UTILISATEUR(
+CREATE TABLE public.UTILISATEUR(
 	idUser     SERIAL NOT NULL ,
 	nomUser    VARCHAR (100) NOT NULL ,
 	prenomUser VARCHAR (50) NOT NULL ,
 	matricule  CHAR (25)   ,
 	mdpUser    CHAR (25)   ,
 	mailUser   CHAR (25)   ,
+	idTypeUtil INT  NOT NULL ,
 	CONSTRAINT prk_constraint_UTILISATEUR PRIMARY KEY (idUser)
 )WITHOUT OIDS;
 
@@ -37,7 +39,7 @@ CREATE TABLE tp.UTILISATEUR(
 ------------------------------------------------------------
 -- Table: RESSOURCE
 ------------------------------------------------------------
-CREATE TABLE tp.RESSOURCE(
+CREATE TABLE public.RESSOURCE(
 	idRessource SERIAL NOT NULL ,
 	intitule    VARCHAR (100) NOT NULL ,
 	etat        VARCHAR (40) NOT NULL ,
@@ -49,7 +51,7 @@ CREATE TABLE tp.RESSOURCE(
 ------------------------------------------------------------
 -- Table: COMMANDE
 ------------------------------------------------------------
-CREATE TABLE tp.COMMANDE(
+CREATE TABLE public.COMMANDE(
 	idCommande   SERIAL NOT NULL ,
 	dateCommande CHAR (25)  NOT NULL ,
 	idUser       INT  NOT NULL ,
@@ -60,7 +62,7 @@ CREATE TABLE tp.COMMANDE(
 ------------------------------------------------------------
 -- Table: SECTEUR
 ------------------------------------------------------------
-CREATE TABLE tp.SECTEUR(
+CREATE TABLE public.SECTEUR(
 	idSecteur  SERIAL NOT NULL ,
 	nomSecteur CHAR (25)   ,
 	idVille    INT   ,
@@ -71,7 +73,7 @@ CREATE TABLE tp.SECTEUR(
 ------------------------------------------------------------
 -- Table: TYPE_UTILISATEUR
 ------------------------------------------------------------
-CREATE TABLE tp.TYPE_UTILISATEUR(
+CREATE TABLE public.TYPE_UTILISATEUR(
 	idTypeUtil SERIAL NOT NULL ,
 	intitule   VARCHAR (50) NOT NULL ,
 	CONSTRAINT prk_constraint_TYPE_UTILISATEUR PRIMARY KEY (idTypeUtil)
@@ -81,7 +83,7 @@ CREATE TABLE tp.TYPE_UTILISATEUR(
 ------------------------------------------------------------
 -- Table: VILLE
 ------------------------------------------------------------
-CREATE TABLE tp.VILLE(
+CREATE TABLE public.VILLE(
 	idVille  SERIAL NOT NULL ,
 	nomVille CHAR (25)   ,
 	CONSTRAINT prk_constraint_VILLE PRIMARY KEY (idVille)
@@ -89,30 +91,20 @@ CREATE TABLE tp.VILLE(
 
 
 ------------------------------------------------------------
--- Table: determiner
+-- Table: concerner
 ------------------------------------------------------------
-CREATE TABLE tp.determiner(
-	idUser     INT  NOT NULL ,
-	idTypeUtil INT  NOT NULL ,
-	CONSTRAINT prk_constraint_determiner PRIMARY KEY (idUser,idTypeUtil)
-)WITHOUT OIDS;
-
-
-------------------------------------------------------------
--- Table: depend
-------------------------------------------------------------
-CREATE TABLE tp.depend(
+CREATE TABLE public.concerner(
 	qteRessource INT  NOT NULL ,
 	idCommande   INT  NOT NULL ,
 	idRessource  INT  NOT NULL ,
-	CONSTRAINT prk_constraint_depend PRIMARY KEY (idCommande,idRessource)
+	CONSTRAINT prk_constraint_concerner PRIMARY KEY (idCommande,idRessource)
 )WITHOUT OIDS;
 
 
 ------------------------------------------------------------
 -- Table: utiliser
 ------------------------------------------------------------
-CREATE TABLE tp.utiliser(
+CREATE TABLE public.utiliser(
 	idRessource INT  NOT NULL ,
 	idInter     INT  NOT NULL ,
 	CONSTRAINT prk_constraint_utiliser PRIMARY KEY (idRessource,idInter)
@@ -120,26 +112,16 @@ CREATE TABLE tp.utiliser(
 
 
 
-ALTER TABLE tp.INTERVENTION ADD CONSTRAINT FK_INTERVENTION_idSecteur FOREIGN KEY (idSecteur) REFERENCES tp.SECTEUR(idSecteur);
-ALTER TABLE tp.INTERVENTION ADD CONSTRAINT FK_INTERVENTION_idUser FOREIGN KEY (idUser) REFERENCES tp.UTILISATEUR(idUser);
-ALTER TABLE tp.INTERVENTION ADD CONSTRAINT FK_INTERVENTION_idUser_UTILISATEUR FOREIGN KEY (idUser_UTILISATEUR) REFERENCES tp.UTILISATEUR(idUser);
-ALTER TABLE tp.COMMANDE ADD CONSTRAINT FK_COMMANDE_idUser FOREIGN KEY (idUser) REFERENCES tp.UTILISATEUR(idUser);
-ALTER TABLE tp.SECTEUR ADD CONSTRAINT FK_SECTEUR_idVille FOREIGN KEY (idVille) REFERENCES tp.VILLE(idVille);
-ALTER TABLE tp.determiner ADD CONSTRAINT FK_determiner_idUser FOREIGN KEY (idUser) REFERENCES tp.UTILISATEUR(idUser);
-ALTER TABLE tp.determiner ADD CONSTRAINT FK_determiner_idTypeUtil FOREIGN KEY (idTypeUtil) REFERENCES tp.TYPE_UTILISATEUR(idTypeUtil);
-ALTER TABLE tp.depend ADD CONSTRAINT FK_depend_idCommande FOREIGN KEY (idCommande) REFERENCES tp.COMMANDE(idCommande);
-ALTER TABLE tp.depend ADD CONSTRAINT FK_depend_idRessource FOREIGN KEY (idRessource) REFERENCES tp.RESSOURCE(idRessource);
-ALTER TABLE tp.utiliser ADD CONSTRAINT FK_utiliser_idRessource FOREIGN KEY (idRessource) REFERENCES tp.RESSOURCE(idRessource);
-ALTER TABLE tp.utiliser ADD CONSTRAINT FK_utiliser_idInter FOREIGN KEY (idInter) REFERENCES tp.INTERVENTION(idInter);
-
-	idInter            SERIAL NOT NULL ,
-	typeInter          CHAR (25)  NOT NULL ,
-	etatInter          CHAR (25)   ,
-	dateDebut          DATE   ,
-	dateFin            DATE   ,
-	idSecteur          INT   ,
-	idUser             INT  NOT NULL ,
-	idUser_UTILISATEUR INT  NOT NULL ,
+ALTER TABLE public.INTERVENTION ADD CONSTRAINT FK_INTERVENTION_idSecteur FOREIGN KEY (idSecteur) REFERENCES public.SECTEUR(idSecteur);
+ALTER TABLE public.INTERVENTION ADD CONSTRAINT FK_INTERVENTION_idUser FOREIGN KEY (idUser) REFERENCES public.UTILISATEUR(idUser);
+ALTER TABLE public.INTERVENTION ADD CONSTRAINT FK_INTERVENTION_idUser_UTILISATEUR FOREIGN KEY (idUser_UTILISATEUR) REFERENCES public.UTILISATEUR(idUser);
+ALTER TABLE public.UTILISATEUR ADD CONSTRAINT FK_UTILISATEUR_idTypeUtil FOREIGN KEY (idTypeUtil) REFERENCES public.TYPE_UTILISATEUR(idTypeUtil);
+ALTER TABLE public.COMMANDE ADD CONSTRAINT FK_COMMANDE_idUser FOREIGN KEY (idUser) REFERENCES public.UTILISATEUR(idUser);
+ALTER TABLE public.SECTEUR ADD CONSTRAINT FK_SECTEUR_idVille FOREIGN KEY (idVille) REFERENCES public.VILLE(idVille);
+ALTER TABLE public.concerner ADD CONSTRAINT FK_concerner_idCommande FOREIGN KEY (idCommande) REFERENCES public.COMMANDE(idCommande);
+ALTER TABLE public.concerner ADD CONSTRAINT FK_concerner_idRessource FOREIGN KEY (idRessource) REFERENCES public.RESSOURCE(idRessource);
+ALTER TABLE public.utiliser ADD CONSTRAINT FK_utiliser_idRessource FOREIGN KEY (idRessource) REFERENCES public.RESSOURCE(idRessource);
+ALTER TABLE public.utiliser ADD CONSTRAINT FK_utiliser_idInter FOREIGN KEY (idInter) REFERENCES public.INTERVENTION(idInter);
 
 
 INSERT INTO tp.TYPE_UTILISATEUR (intitule)
