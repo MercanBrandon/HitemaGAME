@@ -4,7 +4,7 @@ $dbconn = pg_connect("host=localhost dbname=TpGAME user=postgres password=P@ssw0
     or die('Connexion impossible : ' . pg_last_error());
 
 // Exécution de la requête SQL
-$query = 'SELECT * FROM tp.TYPE_UTILISATEUR';
+$query = 'SELECT * FROM tp.INTERVENTION';
 $result = pg_query($query) or die('Échec de la requête : ' . pg_last_error());
 
 // Affichage des résultats en HTML
