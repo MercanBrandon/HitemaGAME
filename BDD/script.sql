@@ -27,7 +27,7 @@ CREATE TABLE tp.INTERVENTION(
 CREATE TABLE tp.UTILISATEUR(
 	idUser     SERIAL NOT NULL ,
 	nomUser    VARCHAR (100) NOT NULL ,
-	prenomUser VARCHAR (50) NOT NULL ,
+	prenomUser VARCHAR (50) NOT NULL ,	
 	matricule  CHAR (25)   ,
 	mdpUser    CHAR (25)   ,
 	mailUser   CHAR (25)   ,
