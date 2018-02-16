@@ -1,0 +1,49 @@
+-- Création des utilisateurs
+
+CREATE USER manager WITH
+	LOGIN
+	NOSUPERUSER
+	NOCREATEDB
+	NOCREATEROLE
+	INHERIT
+	NOREPLICATION
+	CONNECTION LIMIT -1
+	PASSWORD 'manager';
+
+CREATE USER user WITH
+	LOGIN
+	NOSUPERUSER
+	NOCREATEDB
+	NOCREATEROLE
+	INHERIT
+	NOREPLICATION
+	CONNECTION LIMIT -1
+	PASSWORD 'user';
+
+CREATE USER visiteur WITH
+	LOGIN
+	NOSUPERUSER
+	NOCREATEDB
+	NOCREATEROLE
+	INHERIT
+	NOREPLICATION
+	CONNECTION LIMIT -1
+	PASSWORD '';
+
+GRANT ALL ON TABLE tp.commande TO manager;
+
+GRANT ALL ON TABLE tp.concerner TO manager;
+
+GRANT ALL ON TABLE tp.depend TO manager;
+
+GRANT ALL ON TABLE tp.determiner TO manager;
+
+GRANT ALL ON TABLE tp.intervention TO manager;
+
+GRANT ALL ON TABLE tp.ressource TO manager;
+
+GRANT ALL ON TABLE tp.secteur TO manager;
+
+GRANT ALL ON TABLE tp.type_utilisateur TO manager;
+
+GRANT ALL ON TABLE tp.utilisateur TO manager;
