@@ -131,3 +131,55 @@ ALTER TABLE tp.depend ADD CONSTRAINT FK_depend_idCommande FOREIGN KEY (idCommand
 ALTER TABLE tp.depend ADD CONSTRAINT FK_depend_idRessource FOREIGN KEY (idRessource) REFERENCES tp.RESSOURCE(idRessource);
 ALTER TABLE tp.utiliser ADD CONSTRAINT FK_utiliser_idRessource FOREIGN KEY (idRessource) REFERENCES tp.RESSOURCE(idRessource);
 ALTER TABLE tp.utiliser ADD CONSTRAINT FK_utiliser_idInter FOREIGN KEY (idInter) REFERENCES tp.INTERVENTION(idInter);
+
+	idInter            SERIAL NOT NULL ,
+	typeInter          CHAR (25)  NOT NULL ,
+	etatInter          CHAR (25)   ,
+	dateDebut          DATE   ,
+	dateFin            DATE   ,
+	idSecteur          INT   ,
+	idUser             INT  NOT NULL ,
+	idUser_UTILISATEUR INT  NOT NULL ,
+
+
+INSERT INTO tp.TYPE_UTILISATEUR (intitule)
+VALUES ('manager'),('visiteur');
+
+INSERT INTO tp.VILLE (nomVille)
+VALUES ('Paris');
+
+INSERT INTO tp.SECTEUR (nomSecteur,idVille)
+VALUES ('secteur1',1),('secteur2',1),('secteur3',1);
+
+INSERT INTO tp.UTILISATEUR (nomUser,prenomUser,matricule,mdpUser,mailUser)
+VALUES ('marivint','yvann','YM','YM090117!','marivint.yvann@gmail.com');
+
+INSERT INTO tp.COMMANDE (dateCommande,idUser)
+VALUES ('2018-02-16 12:58:00',1);
+
+INSERT INTO tp.RESSOURCE (intitule,etat,qteDispo)
+VALUES ('ordinateur asus','disponible','10');
+
+INSERT INTO SECTEUR (idInter,typeInter,etatInter,dateDebut,dateFin,idSecteur,idUser,idUser_UTILISATEUR)
+VALUES ('','interne','en cours','2018-02-16 11:55:00','2018-02-16 17:00:00',1,1,1);
+
+INSERT INTO SECTEUR (idInter,typeInter,etatInter,dateDebut,dateFin,idSecteur,idUser,idUser_UTILISATEUR)
+VALUES ('','interne','en cours','2018-02-16 11:55:00','2018-02-16 17:00:00',1,1,1);
+
+INSERT INTO SECTEUR (idInter,typeInter,etatInter,dateDebut,dateFin,idSecteur,idUser,idUser_UTILISATEUR)
+VALUES ('','interne','en cours','2018-02-16 11:55:00','2018-02-16 17:00:00',1,1,1);
+
+INSERT INTO SECTEUR (idInter,typeInter,etatInter,dateDebut,dateFin,idSecteur,idUser,idUser_UTILISATEUR)
+VALUES ('','interne','en cours','2018-02-16 11:55:00','2018-02-16 17:00:00',1,1,1);
+
+INSERT INTO SECTEUR (idInter,typeInter,etatInter,dateDebut,dateFin,idSecteur,idUser,idUser_UTILISATEUR)
+VALUES ('','interne','en cours','2018-02-16 11:55:00','2018-02-16 17:00:00',1,1,1);
+
+INSERT INTO SECTEUR (idInter,typeInter,etatInter,dateDebut,dateFin,idSecteur,idUser,idUser_UTILISATEUR)
+VALUES ('','interne','en cours','2018-02-16 11:55:00','2018-02-16 17:00:00',1,1,1);
+
+INSERT INTO SECTEUR (idInter,typeInter,etatInter,dateDebut,dateFin,idSecteur,idUser,idUser_UTILISATEUR)
+VALUES ('','interne','en cours','2018-02-16 11:55:00','2018-02-16 17:00:00',1,1,1);
+
+INSERT INTO UTILISATEUR (idInter,typeInter,etatInter,dateDebut,dateFin,idSecteur,idUser,idUser_UTILISATEUR)
+VALUES ('','interne','en cours','2018-02-16 11:55:00','2018-02-16 17:00:00',1,1,1);
