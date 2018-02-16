@@ -127,6 +127,8 @@ VALUES (1,'manager'),(2,'intervenant'),(3,'visiteur');
 INSERT INTO tp.UTILISATEUR (idUser,nomUser,prenomUser,matricule,mdpUser,mailUser,idTypeUtil)
 VALUES (1,'marivint','yvann','YM','YM090117!','marivint.yvann@gmail.com',2),
 	   (2,'mercan','brandon','BM','BM090117!','mercan.brandon@gmail.com',1);
+	   (2,'lemesle','alexandre','LA','BM090117!','lemesle.alexandre@gmail.com',1);
+	   (2,'larrat','toto','LT','BM090117!','larrat.toto@gmail.com',3);
 
 INSERT INTO tp.VILLE (idVille,nomVille)
 VALUES (1,'Paris'),(2,'Rouen');
@@ -141,12 +143,12 @@ INSERT INTO tp.RESSOURCE (idRessource,intitule,etat,qteDispo)
 VALUES (1,'Box wifi PK01','disponible','10'),(2,'agents','disponible','13'),(3,'téléphones','disponible','22'),(4,'cable JR45','disponible','123');
 
 INSERT INTO tp.INTERVENTION (idInter,typeInter,etatInter,dateDebut,dateFin,intitule,idSecteur,idUser,idUser_UTILISATEUR)
-VALUES 	(1,'interne','Valider','2018-02-17 19:00:00','2018-02-17 20:00:00','Reparation serveur',1,1,1),
-		(2,'externe','Terminer','2018-02-15 13:30:00','2018-02-15 17:00:00','Livraison switch',1,1,1),
-		(3,'externe','EnAttente','2018-02-20 14:00:00','2018-02-21 12:00:00','Installation serveurs',1,1,1),
-		(4,'externe','EnCours','2018-02-16 14:20:00','2018-02-16 17:00:00','Mise en place de la BDD client Horizon',2,2,1),
-		(5,'interne','EnCours','2018-02-16 09:00:00','2018-02-16 20:00:00','Audit connexion 5G',2,2,1),
-		(6,'interne','EnCours','2018-02-16 16:00:00','2018-02-16 17:00:00','Reparation accès internet ligne ABD01',1,2,1);
+VALUES 	(1,'interne','Valider','2018-02-17 19:00:00','2018-02-17 20:00:00','Reparation serveur',1,1,2),
+		(2,'externe','Terminer','2018-02-15 13:30:00','2018-02-15 17:00:00','Livraison switch',1,1,2),
+		(3,'externe','EnAttente','2018-02-20 14:00:00','2018-02-21 12:00:00','Installation serveurs',1,1,2),
+		(4,'externe','EnCours','2018-02-16 14:20:00','2018-02-16 17:00:00','Mise en place de la BDD client Horizon',2,2,2),
+		(5,'interne','EnCours','2018-02-16 09:00:00','2018-02-16 20:00:00','Audit connexion 5G',2,2,2),
+		(6,'interne','EnCours','2018-02-16 16:00:00','2018-02-16 17:00:00','Reparation accès internet ligne ABD01',1,2,2);
 
 INSERT INTO tp.UTILISER (idRessource,idInter)
 VALUES (2,1),(3,1),(2,2),(2,3),(2,4),(2,5),(2,6);
